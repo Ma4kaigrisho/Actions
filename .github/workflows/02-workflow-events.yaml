@@ -1,5 +1,5 @@
-name: 02 - Workflow Event
-on: [push, pull_request, schedule, workflow_dispatch]
+name: 02 - Workflow Events
+on: [workflow_dispatch]
 jobs:
   echo:
     runs-on: ubuntu-latest
