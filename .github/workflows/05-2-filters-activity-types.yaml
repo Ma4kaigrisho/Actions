@@ -1,8 +1,5 @@
 name: 05 - 2 - Event Filters and Activity Types
-on: 
-    pull_request:
-        types: closed
-        branches: master
+on: workflow_dispatch
 jobs:
     echo:
         runs-on: ubuntu-latest
