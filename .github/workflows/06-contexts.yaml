@@ -9,11 +9,11 @@ jobs:
             - name: Display Information
               run: |
                 echo "Event name: ${{github.event_name}}"
-                echo "Ref: <retrieve the ref here>"
-                echo "SHA: <retrieve the commit sha here>"
-                echo "Actor: <retrieve the actor name here>"
-                echo "Workflow: <retrieve the workflow name here>"
-                echo "Run ID: <retrieve the run ID here>"
-                echo "Run number: <retrieve the run number here>"
+                echo "Ref: ${{github.ref_name}}"
+                echo "SHA: ${{github.sha}}"
+                echo "Actor: ${{github.actor}}"
+                echo "Workflow: ${{github.workflow}}"
+                echo "Run ID: ${{github.run_id}}"
+                echo "Run number: ${{github.run_number}}"
             - name: Retrieve Variable
-              run: echo "MY_VAR"
+              run: echo "${{vars.MY_VAR}}"
