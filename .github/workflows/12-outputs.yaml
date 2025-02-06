@@ -19,6 +19,11 @@ jobs:
             - name: Build
               id: build
               run: echo "status=${{inputs.build-status}} >> $GITHUB_OUTPUT"
+    test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - run: echo ${{needs.build.outputs.build-status}}
     deploy:
         runs-on: ubuntu-latest
         needs: build
