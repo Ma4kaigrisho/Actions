@@ -16,4 +16,4 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4.2.2
             - name: Setup Node
-              run: echo opa
+              uses: actions/setup-node@v4.2.0
