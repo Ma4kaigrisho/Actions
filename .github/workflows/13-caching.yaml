@@ -35,7 +35,7 @@ jobs:
                 key: deps-node-modules-${{ hashFiles('13-caching/vite-project/package-lock.json') }}
                 path: 13-caching/vite-project/node_modules
             - name: Install dependencies
-              if: ${{steps.cache.outputs.cache-hit == 'true'}}
+              if: ${{steps.cache.outputs.cache-hit != 'true'}}
               run: |
                 npm ci
                 npm install --save-dev vitest
