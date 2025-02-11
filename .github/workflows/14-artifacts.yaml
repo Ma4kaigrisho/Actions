@@ -51,8 +51,9 @@ jobs:
                 name: ${{ env.workflow_key }}
                 path: build
             - name: Show contents
-              working-directory: 14-artifacts/react-app/dist
-              run: ls -R
+              run: |
+                cd build
+                ls -R
                 
 
 
