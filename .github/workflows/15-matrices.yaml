@@ -37,9 +37,9 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          color: ['red', 'blue']
+          color: ['red', 'blue','green']
           shape: ['circle', 'square']
-          size: ['small','large']
+          size: ['small','large','medium']
           include:
             - color: red
               opacity: 75
@@ -49,7 +49,8 @@ jobs:
               shape: triangle
             - opacity: 50
           exclude:
-            - opacity: 75
+             - color: green
+               shape: circle
 
       steps:
         - name: Dummy step
