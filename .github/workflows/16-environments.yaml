@@ -5,7 +5,7 @@ on:
 jobs:
     deploy-staging:
         runs-on: ubuntu-latest
-        environment: staging
+        environment: prod
         env:
             MY_ENV_VALUE: ${{ vars.MY_ENV_VALUE || 'default value'}}
         steps: 
