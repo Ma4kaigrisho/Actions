@@ -39,7 +39,12 @@ async function run() {
   let status_check_result;
   status_check_result = await exec.getExecOutput("git", ["status", "-s", "package*.json"])
 
-  core.info("Changes:" + status_check_result.stdout)
+  if (status_check_result.stdout.length > 0) {
+    core.info("There are updates available")
+  }
+  else{
+    core.info("No updates at this point")
+  }
 }
 
 async function validateNames(name) {
