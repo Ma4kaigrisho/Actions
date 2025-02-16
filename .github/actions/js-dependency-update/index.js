@@ -49,13 +49,13 @@ async function run() {
 }
 
 async function validateNames(name) {
-  if (/^[A-Za-z0-9._\/-]+$/.test(name)) {
+  if ( /^[a-zA-Z0-9_\-\.\/]/.test(name)) {
     return true
   }
   core.setFailed("Kotakis your input name does not meet the requirements")
 }
 async function validateDirs(name) {
-  if (/^[A-Za-z0-9\/-_]+$/.test(name)) {
+  if (/^[A-Za-z0-9-\_\-\/]+$/.test(name)) {
     return true
   }
   core.setFailed("Kotakis your input directory does not meet the requirements")
