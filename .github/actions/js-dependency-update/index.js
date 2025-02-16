@@ -37,7 +37,7 @@ async function run() {
   let status_check_result;
   status_check_result = await exec.getExecOutput("git", ["status", "-s", "package*.json"])
 
-  core.info(status_check_result.stdout)
+  core.info("Changes:" + status_check_result.stdout)
 }
 
 async function validateNames(name) {
