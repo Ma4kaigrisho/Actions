@@ -28,6 +28,7 @@ async function run() {
   const target_branch_validation = await validateNames(target_branch)
   const working_directory_validation = await validateDirs(working_directory)
 
+  core.info(working_directory)
   if(base_branch_validation && target_branch_validation && working_directory_validation){
     core.info("Base branch: " + base_branch)
     core.info("Target branch: " + target_branch)
