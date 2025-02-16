@@ -22,6 +22,8 @@ async function run() {
   const gh_token = core.getInput('gh-token');
   const debug = core.getBooleanInput('debug');
 
+  core.setSecret(gh_token);
+
   const base_branch_validation = await validateNames(base_branch)
   const target_branch_validation = await validateNames(target_branch)
   const working_directory_validation = await validateDirs(working_directory)
