@@ -1,5 +1,6 @@
 const core = require('@actions/core');
-const exec = require('@actions/exec')
+const exec = require('@actions/exec');
+const github = require('@actions/github')
  
 async function run() { 
   /*
@@ -34,6 +35,9 @@ async function run() {
     core.info("Target branch: " + target_branch)
     core.info("Working direcotry: " + working_directory)
   }
+  else{
+    return
+  }
 
   await exec.exec("npm",["update"],{"cwd": working_directory})
 
@@ -42,10 +46,32 @@ async function run() {
 
   if (status_check_result.stdout.length > 0) {
     core.info("There are updates available")
+    await exec.exec("git",["checkout", target_branch])
+    await exec.exec("git", ["add", "package.json", "package-lock.json"])
+    await exec.exec("git", ["commit", "-m", "'dependencies update'"])
+    await exec.exec("git", ["push", "-u", "origin", target_branch])
   }
   else{
     core.info("No updates at this point")
+    return
   }
+
+  const octokit = github.getOctokit(gh_token)
+  try{
+    await octokit.rest.pulls.create({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      title: 'Update NPM dependencies',
+      body: 'This PR updates NPM packages',
+      base: base_branch,
+      head: target_branch
+    });
+  } catch(e){
+    core.error('[js-dependency-update] : Something went wrong while creating the PR. Check logs below.');
+    core.setFailed(e.name);
+    core.error(e);
+  }
+
 }
 
 async function validateNames(name) {
@@ -53,11 +79,13 @@ async function validateNames(name) {
     return true
   }
   core.setFailed("Kotakis your input name does not meet the requirements")
+  return
 }
 async function validateDirs(name) {
   if (/^[A-Za-z0-9-\_\-\/]+$/.test(name)) {
     return true
   }
   core.setFailed("Kotakis your input directory does not meet the requirements")
+  return
 }
 run();
