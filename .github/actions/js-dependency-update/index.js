@@ -29,6 +29,10 @@ async function run() {
   const target_branch_validation = await validateNames(target_branch)
   const working_directory_validation = await validateDirs(working_directory)
 
+  const commonExecOpts = {
+    cwd: working_directory,
+  };
+
   core.info(working_directory)
   if(base_branch_validation && target_branch_validation && working_directory_validation){
     core.info("Base branch: " + base_branch)
@@ -39,17 +43,29 @@ async function run() {
     return
   }
 
-  await exec.exec("npm",["update"],{"cwd": working_directory})
+  await exec.exec("npm",["update"],{
+    ...commonExecOpts,
+  });
 
   let status_check_result;
-  status_check_result = await exec.getExecOutput("git", ["status", "-s", "package*.json"])
+  status_check_result = await exec.getExecOutput("git", ["status", "-s", "package*.json"], {
+    ...commonExecOpts
+  });
 
   if (status_check_result.stdout.length > 0) {
     core.info("There are updates available")
-    await exec.exec("git",["checkout", target_branch])
-    await exec.exec("git", ["add", "package.json", "package-lock.json"])
-    await exec.exec("git", ["commit", "-m", "'dependencies update'"])
-    await exec.exec("git", ["push", "-u", "origin", target_branch])
+    await exec.exec("git",["checkout", "-b" ,target_branch],{
+      ...commonExecOpts
+    });
+    await exec.exec("git", ["add", "package.json", "package-lock.json"], {
+      ...commonExecOpts
+    });
+    await exec.exec("git", ["commit", "-m", "'dependencies update'"],{
+      ...commonExecOpts
+    });
+    await exec.exec("git", ["push", "-u", "origin", target_branch], {
+      ...commonExecOpts
+    });
   }
   else{
     core.info("No updates at this point")
