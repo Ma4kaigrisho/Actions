@@ -1,0 +1,29 @@
+name: 17 - 3 - Custom Actions - Docker.
+on: 
+    workflow_dispatch:
+        inputs:
+            url:
+                type: choice
+                options:
+                  - 'https://www.google.com'
+                  - 'http://maikati.com/'
+                default: 'https://www.google.com'
+            max_trials:
+              description: Maximum trials until action fails
+              default: '10'
+            delay:
+              description: Delay in seconds between trials
+              default: '5'
+
+jobs:
+    ping-url:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.2.2
+            - name: Ping URL
+              uses: ./.gihub/actions/docker-ping-url
+              with:
+                url: ${{ inputs.url }}
+                max_trails: ${{inputs.max_trials}}
+                delay: ${{ inputs.delay}}

@@ -19,7 +19,9 @@ on:
         required: true
       debug:
         description: Whether the output debug messages to the console
+        type: boolean
         required: false
+        default: false
 jobs: 
     dependency-update:
         runs-on: ubuntu-latest
