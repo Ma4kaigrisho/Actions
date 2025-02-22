@@ -1,5 +1,9 @@
 name: Cache Node and NPM Dependencies
 description: "This action allows to cache both Node and NPM dependencies based on the package-lock.json file."
+outputs:
+  installed-deps:
+    description: Whether dependencies were installed or not
+    value: ${{ steps.cache.outputs.cache-hit != 'true''}}
 inputs:
   node-version:
     required: true
