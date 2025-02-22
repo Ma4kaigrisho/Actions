@@ -1,5 +1,8 @@
 name: Ping URL
 description: "Ping URL until maximum trials have exceeded. If result is not 200 until then, fails the action."
+outputs: 
+  url-reachable:
+    description: Whether the URL is reachable
 inputs:
   url:
     description: URL to Ping
