@@ -13,7 +13,7 @@ def ping_url(url, max_trials, delay):
             print(f"Website {url} is unreachable. Retrying in {delay} seconds...")
             time.sleep(delay)
         except requests.exceptions.MissingSchema:
-            print(f"Invalid URL format")
+            print(f"Invalid URL format for {url}")
             return False
     return False
 
@@ -25,6 +25,6 @@ def run():
     website_reachable = ping_url(website_url, delay, max_trials)
     if( not website_reachable):
         raise Exception("Website not reachable")
-    print("Website is reachable")
+    print(f"Website {website_url} is reachable")
 if __name__ == "__main__":
     run()
