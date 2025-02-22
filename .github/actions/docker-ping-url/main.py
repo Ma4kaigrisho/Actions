@@ -27,7 +27,7 @@ def run():
         raise Exception("Website not reachable")
     print(f"Website {website_url} is reachable")
 
-    with open(file="$GITHUB_OUTPUT", mode='a') as f:
-        f.write(f"url-reachable={website_reachable}")
+    with open(file="$GITHUB_OUTPUT", mode='a') as git:
+        print(f"url-reachable={website_reachable}",file=git)
 if __name__ == "__main__":
     run()
