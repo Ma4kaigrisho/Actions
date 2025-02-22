@@ -22,13 +22,14 @@ def run():
     delay = int(os.getenv("INPUT_DELAY"))
     max_trials = os.getenv("INPUT_MAX_TRIALS")
 
-    website_reachable = ping_url(website_url, delay, max_trials)
+    website_reachable = ping_url(website_url, max_trials, delay)
     if( not website_reachable):
         raise Exception("Website not reachable")
     print(f"Website {website_url} is reachable")
     print(website_reachable)
 
-    with open(file="$GITHUB_OUTPUT", mode='a') as git:
-        print(f"url-reachable={website_reachable}",file=git)
+    output_file = os.getenv("GITHUB_OUTPUT")
+    with open(output_file, 'a') as git:
+        print(f"url-reachable={website_reachable}", file=git)
 if __name__ == "__main__":
     run()
