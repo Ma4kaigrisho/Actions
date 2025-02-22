@@ -22,7 +22,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4.2.2
             - name: Ping URL
-              uses: ./.gihub/actions/docker-ping-url
+              uses: ./.gihub/Аctions/docker-ping-url
               with:
                 url: ${{ inputs.url }}
                 max_trails: ${{inputs.max_trials}}
