@@ -10,8 +10,8 @@ def ping_url(url, max_trials, delay):
             if(response.status_code == 200):
                 return True
         except requests.ConnectionError:
-            print(f"Website {url} is unreachable. Retrying in {delay} seconds...")
-            time.sleep(delay)
+            print(f"Website {url} is unreachable. Retrying in {str(delay)} seconds...")
+            time.sleep(int(delay))
         except requests.exceptions.MissingSchema:
             print(f"Invalid URL format for {url}")
             return False
