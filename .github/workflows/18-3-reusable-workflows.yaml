@@ -9,4 +9,5 @@ jobs:
     e2e-test:
         needs: deploy
         uses: Ma4kaigrisho/github-actions-course-example-e2e/.github/workflows/e2e.yaml@main
-        
+        secrets: 
+            access-token: ${{secrets.GH_TOKEN}}
