@@ -10,7 +10,7 @@ jobs:
             - name: Check PR title
               shell: bash
               run: |
-                title="${{ github.event.pull_request.title }}"
+                title=${{ github.event.pull_request.title }}
                 if [[ $title =~ ^feat ]]; then
                 echo "PR is a feature"
                 exit 0
