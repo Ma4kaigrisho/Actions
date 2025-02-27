@@ -2,12 +2,15 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 
 async function run() {
-    const pr_title = core.getInput("pr-title");
-    if(/^feat/.test(pr_title)){
+    try{const pr_title = core.getInput("pr-title");
+    if(pr_title.startsWith('feat')){
         core.info("PR is a feature")
     }
     else{
-        core.info("PR is not a feature")
+        core.setFailed("PR is not a feature")
+    }}
+    catch(e){
+        core.setFailed(e.message)
     }
 }
 run()
